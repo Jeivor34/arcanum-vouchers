@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portal oficial de vouchers de pago de Arcanum Studios. Consulta comprobantes verificados de doblaje y localización." />
+  <title>Arcanum Studios — Portal Oficial · Vouchers de Pago</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080d;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-2: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(255, 255, 255, 0.17);
+      --gold: #eccf8b;
+      --gold-2: #d9b264;
+      --gold-deep: #b98a3c;
+      --gold-ink: #241a08;
+      --violet: #8b7cf6;
+      --cream: #f4f1e9;
+      --text-muted: #a8a4b3;
+      --text-dim: #6d6a78;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --serif: 'Sora', 'Inter', sans-serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Aurora ambient background */
+    .aurora {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+    }
+    .aurora span {
+      position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.55;
+      animation: drift 26s ease-in-out infinite alternate;
+    }
+    .aurora span:nth-child(1) {
+      width: 620px; height: 620px; top: -200px; left: -160px;
+      background: radial-gradient(circle, rgba(236, 207, 139, 0.16), transparent 65%);
+    }
+    .aurora span:nth-child(2) {
+      width: 700px; height: 700px; bottom: -280px; right: -200px;
+      background: radial-gradient(circle, rgba(139, 124, 246, 0.14), transparent 65%);
+      animation-duration: 32s; animation-direction: alternate-reverse;
+    }
+    .aurora span:nth-child(3) {
+      width: 420px; height: 420px; top: 38%; left: 55%;
+      background: radial-gradient(circle, rgba(217, 178, 100, 0.08), transparent 65%);
+      animation-duration: 38s;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(60px, 40px) scale(1.12); }
+    }
+
+    ::selection { background: rgba(236, 207, 139, 0.28); color: #fff; }
+
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 8px; border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(236,207,139,0.35); }
+
+    :focus-visible { outline: 2px solid rgba(236, 207, 139, 0.65); outline-offset: 2px; border-radius: 6px; }
+
+    /* ============ Header ============ */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(8, 8, 13, 0.72);
+      backdrop-filter: blur(18px) saturate(1.3);
+      -webkit-backdrop-filter: blur(18px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1180px; margin: 0 auto; padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 13px;
+      text-decoration: none; color: inherit; cursor: pointer; user-select: none;
+    }
+    .brand-logo {
+      width: 42px; height: 42px; border-radius: 13px; flex-shrink: 0;
+      display: grid; place-items: center;
+      background: linear-gradient(145deg, rgba(236,207,139,0.16), rgba(236,207,139,0.04));
+      border: 1px solid rgba(236, 207, 139, 0.35);
+      box-shadow: 0 0 22px rgba(236, 207, 139, 0.14), inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-title {
+      font-family: var(--serif); font-size: 1.06rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.2;
+    }
+    .brand-sub {
+      font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-muted); margin-top: 2px;
+    }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 18px; border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--cream); font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+      cursor: pointer; transition: all 0.22s var(--ease-spring);
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover {
+      border-color: rgba(236, 207, 139, 0.55);
+      background: rgba(236, 207, 139, 0.09);
+      color: var(--gold);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(236, 207, 139, 0.12);
+    }
+    .btn-ghost:active { transform: translateY(0) scale(0.98); }
+
+    /* ============ Layout ============ */
+    .container { max-width: 1180px; margin: 0 auto; padding: 64px 28px 90px; }
+
+    .hero-grid {
+      display: grid; grid-template-columns: 1.08fr 0.92fr;
+      gap: 60px; align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid rgba(236, 207, 139, 0.28);
+      background: rgba(236, 207, 139, 0.07);
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 26px;
+    }
+    .eyebrow-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background-color: var(--success);
+      box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(0.82); }
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4.8vw, 4rem);
+      font-weight: 600; line-height: 1.06; letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .hero-title .grad {
+      background: linear-gradient(100deg, #f6e3b4 0%, var(--gold-2) 45%, var(--violet) 115%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1rem; line-height: 1.75; color: var(--text-muted);
+      max-width: 520px; margin-bottom: 42px;
+    }
+
+    .steps-list { display: flex; flex-direction: column; gap: 12px; }
+    .step-item {
+      display: grid; grid-template-columns: 44px 1fr; gap: 15px;
+      padding: 16px 18px; border-radius: 16px;
+      border: 1px solid transparent;
+      background: rgba(255,255,255,0.02);
+      transition: all 0.25s ease;
+    }
+    .step-item:hover {
+      border-color: var(--border);
+      background: rgba(255,255,255,0.045);
+      transform: translateX(4px);
+    }
+    .step-num {
+      width: 34px; height: 34px; border-radius: 11px;
+      display: grid; place-items: center;
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      color: var(--gold);
+      background: rgba(236, 207, 139, 0.1);
+      border: 1px solid rgba(236, 207, 139, 0.25);
+    }
+    .step-title { font-size: 0.94rem; font-weight: 600; margin-bottom: 3px; letter-spacing: 0.01em; }
+    .step-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ============ Ticket card ============ */
+    .ticket-card {
+      position: relative;
+      border-radius: 22px;
+      background: linear-gradient(165deg, rgba(255,255,255,0.075), rgba(255,255,255,0.02) 60%);
+      border: 1px solid var(--border-strong);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 36px 34px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+      animation: cardIn 0.7s var(--ease-spring) both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(22px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .ticket-card::before, .ticket-card::after {
+      content: ""; position: absolute; top: 132px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background-color: var(--bg);
+      border: 1px solid var(--border-strong);
+      z-index: 2;
+    }
+    .ticket-card::before { left: -12px; clip-path: inset(0 0 0 50%); }
+    .ticket-card::after  { right: -12px; clip-path: inset(0 50% 0 0); }
+
+    .card-kicker {
+      font-family: var(--mono);
+      font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 8px;
+    }
+    .card-heading {
+      font-family: var(--serif); font-size: 1.8rem; font-weight: 600;
+      letter-spacing: -0.02em; margin-bottom: 24px;
+    }
+    .ticket-divider { border: none; border-top: 1px dashed rgba(255,255,255,0.2); margin: 0 -6px 26px; }
+
+    .field-label {
+      display: block; font-size: 0.66rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 10px;
+    }
+    .input-control {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-strong);
+      border-radius: 13px;
+      padding: 14px 16px;
+      color: var(--cream);
+      font-family: var(--sans); font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .input-control::placeholder { color: var(--text-dim); }
+    .input-control:hover { border-color: rgba(255,255,255,0.26); }
+    .input-control:focus {
+      border-color: rgba(236, 207, 139, 0.65);
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 0 4px rgba(236, 207, 139, 0.13);
+    }
+    select.input-control { appearance: none; cursor: pointer; }
+
+    .btn-primary {
+      width: 100%; margin-top: 20px;
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 15px 22px; border: none; border-radius: 14px;
+      background: linear-gradient(115deg, #f6dfa8 0%, var(--gold-2) 48%, var(--gold-deep) 100%);
+      color: var(--gold-ink);
+      font-family: var(--sans); font-size: 0.93rem; font-weight: 600; letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(217, 178, 100, 0.25), inset 0 1px 0 rgba(255,255,255,0.45);
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s, filter 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 16px 38px rgba(217, 178, 100, 0.35), inset 0 1px 0 rgba(255,255,255,0.45); }
+    .btn-primary:active { transform: translateY(0) scale(0.985); }
+    .btn-primary-center { justify-content: center; gap: 8px; }
+
+    .card-footnote {
+      margin-top: 18px; font-size: 0.78rem; line-height: 1.6; color: var(--text-muted);
+    }
+    .quick-samples {
+      margin-top: 16px; padding-top: 15px;
+      border-top: 1px dashed rgba(255,255,255,0.14);
+      display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
+      font-size: 0.75rem; color: var(--text-dim);
+    }
+    .chip-btn {
+      background: rgba(236, 207, 139, 0.08);
+      border: 1px solid rgba(236, 207, 139, 0.22);
+      color: var(--gold);
+      border-radius: 999px; padding: 4px 12px;
+      font-family: var(--sans); font-size: 0.74rem; font-weight: 500;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .chip-btn:hover { background: rgba(236, 207, 139, 0.2); transform: translateY(-1px); }
+
+    /* ============ Results ============ */
+    .results-section {
+      margin-top: 64px; padding-top: 44px;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.45s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .results-header {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;
+      gap: 16px; margin-bottom: 26px;
+    }
+    .results-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+
+    .voucher-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 20px;
+    }
+    .voucher-item {
+      position: relative;
+      border-radius: 18px; padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      backdrop-filter: blur(10px);
+      display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+      overflow: hidden;
+      transition: transform 0.25s var(--ease-spring), box-shadow 0.25s, border-color 0.25s;
+    }
+    .voucher-item::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(236,207,139,0.7), transparent);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .voucher-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(236, 207, 139, 0.35);
+      box-shadow: 0 22px 46px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(236,207,139,0.08);
+    }
+    .voucher-item:hover::before { opacity: 1; }
+
+    .voucher-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .voucher-code {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.05em;
+      padding: 4px 10px; border-radius: 8px;
+      background: rgba(236, 207, 139, 0.08);
+      border: 1px solid rgba(236, 207, 139, 0.2);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 999px;
+    }
+    .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .badge-pagado   { background: rgba(74, 222, 128, 0.1);  color: var(--success); border: 1px solid rgba(74, 222, 128, 0.3); }
+    .badge-pendiente{ background: rgba(251, 191, 36, 0.1);  color: var(--warning); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-anulado  { background: rgba(248, 113, 113, 0.1); color: var(--danger);  border: 1px solid rgba(248, 113, 113, 0.3); }
+
+    .voucher-project { font-family: var(--serif); font-size: 1.18rem; font-weight: 600; margin-top: 12px; letter-spacing: -0.01em; }
+    .voucher-talent  { font-size: 0.84rem; color: var(--text-muted); margin-top: 4px; }
+
+    .voucher-meta {
+      font-size: 0.83rem; color: var(--text-muted);
+      display: grid; gap: 8px; padding-top: 14px;
+      border-top: 1px dashed rgba(255,255,255,0.14);
+    }
+    .voucher-meta-row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .voucher-amount {
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
+      background: linear-gradient(100deg, #f6e3b4, var(--gold-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* ============ Admin ============ */
+    .hidden { display: none !important; }
+
+    .admin-panel-grid {
+      display: grid; grid-template-columns: 380px 1fr; gap: 30px; align-items: start;
+    }
+    .form-group { margin-bottom: 15px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+    }
+    table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 0.86rem; }
+    th {
+      text-align: left; padding: 15px 18px;
+      font-family: var(--mono); font-size: 0.64rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      position: sticky; top: 0;
+    }
+    td { padding: 15px 18px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tbody tr { transition: background 0.18s; }
+    tbody tr:hover { background: rgba(236, 207, 139, 0.035); }
+    tr:last-child td { border-bottom: none; }
+
+    .action-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .mini-btn {
+      padding: 6px 12px; border-radius: 9px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255,255,255,0.03);
+      color: var(--cream); font-family: var(--sans);
+      font-size: 0.74rem; font-weight: 500;
+      cursor: pointer; transition: all 0.18s ease;
+    }
+    .mini-btn:hover { border-color: rgba(236, 207, 139, 0.55); color: var(--gold); background: rgba(236, 207, 139, 0.08); transform: translateY(-1px); }
+    .mini-btn-danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(248, 113, 113, 0.08); }
+
+    /* ============ Receipt modal ============ */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(5, 5, 9, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: grid; place-items: center; padding: 20px; z-index: 60;
+      animation: fadeIn 0.25s ease both;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .receipt-sheet {
+      position: relative;
+      background: linear-gradient(170deg, #17161f, #111017);
+      border: 1px solid rgba(236, 207, 139, 0.4);
+      border-radius: 20px;
+      max-width: 580px; width: 100%;
+      padding: 38px 36px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.75), 0 0 60px rgba(236, 207, 139, 0.07);
+      animation: sheetIn 0.35s var(--ease-spring) both;
+    }
+    @keyframes sheetIn {
+      from { opacity: 0; transform: translateY(26px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .receipt-sheet::before {
+      content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(236,207,139,0.6), transparent);
+    }
+    .receipt-header {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+      padding-bottom: 20px; border-bottom: 1px dashed rgba(255,255,255,0.18); margin-bottom: 22px;
+    }
+    .receipt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 24px; }
+    .receipt-label {
+      font-family: var(--mono);
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 4px;
+    }
+    .receipt-val { font-size: 0.94rem; color: var(--cream); font-weight: 500; }
+
+    .barcode {
+      display: flex; align-items: flex-end; gap: 2px; height: 34px; margin: 4px 0 2px;
+    }
+    .barcode i { display: block; background: rgba(244, 241, 233, 0.75); border-radius: 1px; }
+
+    .alert-box {
+      margin-top: 16px; padding: 13px 15px; border-radius: 12px;
+      font-size: 0.82rem; line-height: 1.5;
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      background: rgba(248, 113, 113, 0.08);
+      color: var(--danger);
+    }
+
+    /* ============ Footer ============ */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px; text-align: center;
+      font-size: 0.75rem; color: var(--text-dim);
+    }
+    .site-footer strong { color: var(--text-muted); font-weight: 500; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 44px; align-items: start; }
+      .admin-panel-grid { grid-template-columns: 1fr; }
+      .container { padding: 42px 20px 70px; }
+    }
+    @media (max-width: 600px) {
+      .topbar-inner { padding: 12px 16px; }
+      .brand-sub { display: none; }
+      .receipt-grid { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .ticket-card { padding: 28px 22px; }
+      .ticket-card::before, .ticket-card::after { top: 124px; }
+      .nav-actions .btn-ghost { padding: 8px 13px; font-size: 0.76rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #receiptModal, #receiptModal * { visibility: visible; }
+      #receiptModal { position: fixed; inset: 0; background: #ffffff; padding: 0; backdrop-filter: none; }
+      .receipt-sheet {
+        background: #ffffff !important; color: #111111 !important;
+        border: 1px solid #cccccc !important; box-shadow: none !important;
+        max-width: 100%; border-radius: 0;
+      }
+      .receipt-val, .brand-title, .voucher-amount, .receipt-sheet .card-heading { color: #111111 !important; -webkit-text-fill-color: #111111; }
+      .receipt-label { color: #555555 !important; }
+      .barcode i { background: #111111 !important; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" onclick="switchView('public')">
+        <span class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="48" y2="48">
+                <stop offset="0" stop-color="#f6e3b4"/>
+                <stop offset="1" stop-color="#b98a3c"/>
+              </linearGradient>
+            </defs>
+            <circle cx="24" cy="24" r="20" stroke="url(#logoGrad)" stroke-width="2"/>
+            <path d="M24 11 L34 37 H29.8 L24 21.5 L18.2 37 H14 Z" fill="url(#logoGrad)"/>
+            <path d="M19.5 29.5 H28.5" stroke="url(#logoGrad)" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">Arcanum Studios</span>
+          <span class="brand-sub">Portal Oficial &middot; Vouchers de Pago</span>
+        </span>
+      </div>
+
+      <div class="nav-actions">
+        <button id="navPublicBtn" class="btn-ghost hidden" onclick="switchView('public')">
+          &larr; Portal de consulta
+        </button>
+        <button id="navAdminBtn" class="btn-ghost" onclick="switchView('admin')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="4" y="11" width="16" height="10" rx="2"/>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+          </svg>
+          Administraci&oacute;n
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PUBLIC VIEW -->
+  <main id="publicView" class="container">
+    <section class="hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Consulta oficial y verificada
+        </div>
+
+        <h1 class="hero-title">
+          Tu voucher de pago,<br>
+          <span class="grad">verificado en la fuente.</span>
+        </h1>
+
+        <p class="hero-desc">
+          Consulta en tiempo real los comprobantes de pago emitidos por Arcanum Studios a talentos de voz, directores, traductores y colaboradores. Cada voucher se valida directamente contra nuestro registro.
+        </p>
+
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">Escribe tu nombre completo</div>
+              <div class="step-text">Nombres y apellidos, tal como figuras en tu registro con Arcanum Studios. No importan may&uacute;sculas ni tildes.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">Valida el estado del comprobante</div>
+              <div class="step-text">Verifica el c&oacute;digo &uacute;nico de emisi&oacute;n, proyecto asociado, rol desempe&ntilde;ado, monto en USD y estatus de liquidaci&oacute;n.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-title">Descarga o imprime tu respaldo</div>
+              <div class="step-text">Abre la vista de comprobante oficial para guardarlo en PDF o presentarlo como constancia administrativa.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Card -->
+      <div class="ticket-card">
+        <div class="card-kicker">Formulario de consulta</div>
+        <h2 class="card-heading">Consultar voucher</h2>
+        <hr class="ticket-divider" />
+
+        <form onsubmit="handleSearch(event)">
+          <label class="field-label" for="searchNameInput">Nombre completo</label>
+          <input
+            id="searchNameInput"
+            class="input-control"
+            type="text"
+            placeholder="Ej. Mar&iacute;a Fernanda L&oacute;pez R&iacute;os"
+            autocomplete="off"
+            required
+          />
+
+          <button type="submit" class="btn-primary">
+            <span>Buscar mis vouchers</span>
+            <span>&rarr;</span>
+          </button>
+        </form>
+
+        <p class="card-footnote">
+          Tu nombre solo se usa para buscar tus comprobantes. &iquest;No aparece ning&uacute;n voucher? Escr&iacute;benos a tu productor de contacto en Arcanum Studios.
+        </p>
+
+        <div class="quick-samples">
+          <span>Ejemplos cargados:</span>
+          <button type="button" class="chip-btn" onclick="quickSearch('María Fernanda López Ríos')">Mar&iacute;a Fernanda L&oacute;pez</button>
+          <button type="button" class="chip-btn" onclick="quickSearch('Jeivor Josué Febres Ramos')">Jeivor Febres</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Results -->
+    <section id="resultsSection" class="results-section hidden">
+      <div class="results-header">
+        <div>
+          <div class="eyebrow" style="margin-bottom:10px;">Registro verificado</div>
+          <h3 id="resultsHeading" class="results-title">Comprobantes encontrados</h3>
+        </div>
+        <button class="btn-ghost" onclick="clearSearch()">Limpiar b&uacute;squeda</button>
+      </div>
+      <div id="resultsGrid" class="voucher-grid"></div>
+    </section>
+  </main>
+
+  <!-- ADMIN LOGIN & DASHBOARD VIEW -->
+  <main id="adminView" class="container hidden">
+    <!-- Login Screen -->
+    <section id="adminLoginSection" class="hero-grid">
+      <div>
+        <div class="eyebrow">Acceso restringido</div>
+        <h1 class="hero-title">
+          Registro de <span class="grad">pagos y vouchers.</span>
+        </h1>
+        <p class="hero-desc">
+          Emite, corrige y anula los comprobantes que el equipo de doblaje, direcci&oacute;n y localizaci&oacute;n consulta en el portal p&uacute;blico de Arcanum Studios.
+        </p>
+      </div>
+
+      <div class="ticket-card">
+        <div class="card-kicker">Panel administrativo</div>
+        <h2 class="card-heading">Iniciar sesi&oacute;n</h2>
+        <hr class="ticket-divider" />
+
+        <form onsubmit="handleAdminLogin(event)">
+          <div class="form-group">
+            <label class="field-label" for="adminEmail">Correo</label>
+            <input id="adminEmail" class="input-control" type="email" placeholder="Correo de administrador" autocomplete="off" required />
+          </div>
+
+          <div class="form-group">
+            <label class="field-label" for="adminPass">Clave de acceso</label>
+            <input id="adminPass" class="input-control" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="new-password" required />
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <span>Entrar al panel</span>
+            <span>&rarr;</span>
+          </button>
+        </form>
+
+        <div id="loginFeedback" class="alert-box hidden"></div>
+      </div>
+    </section>
+
+    <!-- Authenticated Admin Dashboard -->
+    <section id="adminDashboardSection" class="hidden">
+      <div class="results-header" style="margin-bottom:34px;">
+        <div>
+          <div class="eyebrow" style="margin-bottom:10px;">
+            <span class="eyebrow-dot"></span>
+            Sesi&oacute;n activa &middot; Administrador
+          </div>
+          <h2 class="results-title" style="font-size:1.9rem;">Gesti&oacute;n de Vouchers &mdash; Arcanum Studios</h2>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn-ghost" onclick="exportBackup()">Exportar respaldo JSON</button>
+          <button class="btn-ghost" onclick="logoutAdmin()">Cerrar sesi&oacute;n</button>
+        </div>
+      </div>
+
+      <div class="admin-panel-grid">
+        <!-- Create / Edit Voucher Form -->
+        <div class="ticket-card" style="padding:28px;">
+          <div class="card-kicker" id="formModeKicker">Nueva emisi&oacute;n</div>
+          <h3 class="card-heading" style="font-size:1.45rem;" id="formModeTitle">Emitir voucher</h3>
+          <hr class="ticket-divider" style="margin-bottom:20px;" />
+
+          <form id="voucherForm" onsubmit="saveVoucher(event)">
+            <input type="hidden" id="editVoucherId" />
+
+            <div class="form-group">
+              <label class="field-label" for="vTalent">Nombre completo del talento / colaborador</label>
+              <input id="vTalent" class="input-control" type="text" placeholder="Ej. María Fernanda López Ríos" required />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="field-label" for="vRole">Rol desempe&ntilde;ado</label>
+                <select id="vRole" class="input-control">
+                  <option value="Talento de Voz">Talento de Voz</option>
+                  <option value="Dirección de Doblaje">Direcci&oacute;n de Doblaje</option>
+                  <option value="Traducción / Adaptación">Traducci&oacute;n / Adaptaci&oacute;n</option>
+                  <option value="Ingeniería de Audio">Ingenier&iacute;a de Audio</option>
+                  <option value="Control de Calidad (QC)">Control de Calidad (QC)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="field-label" for="vAmount">Monto (USD)</label>
+                <input id="vAmount" class="input-control" type="number" step="0.01" min="0" placeholder="120.00" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="field-label" for="vProject">Proyecto / Producci&oacute;n</label>
+              <input id="vProject" class="input-control" type="text" placeholder="Ej. Proyecto 747 · Doblaje Español Latino" required />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="field-label" for="vDate">Fecha de emisi&oacute;n</label>
+                <input id="vDate" class="input-control" type="date" required />
+              </div>
+
+              <div class="form-group">
+                <label class="field-label" for="vStatus">Estado</label>
+                <select id="vStatus" class="input-control">
+                  <option value="Pagado">Pagado</option>
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="Anulado">Anulado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="field-label" for="vMethod">M&eacute;todo / Referencia de pago</label>
+              <input id="vMethod" class="input-control" type="text" placeholder="Ej. PayPal / Binance / Pago Móvil #4821" />
+            </div>
+
+            <button type="submit" class="btn-primary btn-primary-center" id="submitVoucherBtn">
+              Emitir y publicar voucher
+            </button>
+
+            <button type="button" id="cancelEditBtn" class="btn-ghost hidden" style="width:100%; justify-content:center; margin-top:10px;" onclick="resetVoucherForm()">
+              Cancelar edici&oacute;n
+            </button>
+          </form>
+        </div>
+
+        <!-- Vouchers Table -->
+        <div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>C&oacute;digo</th>
+                  <th>Beneficiario</th>
+                  <th>Proyecto</th>
+                  <th>Monto</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="adminTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <strong>Arcanum Studios</strong> &middot; Doblaje y localizaci&oacute;n profesional &middot; &copy; 2026
+  </footer>
+
+  <!-- Printable Official Receipt Modal -->
+  <div id="receiptModal" class="modal-backdrop hidden" onclick="closeReceiptModal(event)">
+    <div class="receipt-sheet" onclick="event.stopPropagation()">
+      <div class="receipt-header">
+        <div>
+          <svg width="30" height="30" viewBox="0 0 48 48" fill="none" style="margin-bottom:8px;">
+            <circle cx="24" cy="24" r="20" stroke="url(#logoGrad)" stroke-width="2"/>
+            <path d="M24 11 L34 37 H29.8 L24 21.5 L18.2 37 H14 Z" fill="url(#logoGrad)"/>
+            <path d="M19.5 29.5 H28.5" stroke="url(#logoGrad)" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="brand-sub" style="font-size:0.62rem;">Comprobante Oficial de Pago Verificado</div>
+        </div>
+        <div style="text-align:right;">
+          <div id="mCode" class="voucher-code" style="font-size:0.9rem;">ARC-2026-001</div>
+          <div id="mBadgeWrap" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <div class="receipt-grid">
+        <div>
+          <div class="receipt-label">Beneficiario</div>
+          <div id="mTalent" class="receipt-val"></div>
+        </div>
+        <div>
+          <div class="receipt-label">Rol en producci&oacute;n</div>
+          <div id="mRole" class="receipt-val"></div>
+        </div>
+        <div>
+          <div class="receipt-label">Proyecto</div>
+          <div id="mProject" class="receipt-val"></div>
+        </div>
+        <div>
+          <div class="receipt-label">Fecha de emisi&oacute;n</div>
+          <div id="mDate" class="receipt-val"></div>
+        </div>
+        <div>
+          <div class="receipt-label">M&eacute;todo / Referencia</div>
+          <div id="mMethod" class="receipt-val"></div>
+        </div>
+        <div>
+          <div class="receipt-label">Monto liquidado</div>
+          <div id="mAmount" class="voucher-amount" style="font-size:1.7rem;"></div>
+        </div>
+      </div>
+
+      <div class="barcode" id="receiptBarcode" aria-hidden="true"></div>
+
+      <p style="font-size:0.75rem; color:var(--text-muted); border-top:1px solid var(--border); padding-top:14px; margin-top:14px;">
+        Documento emitido electr&oacute;nicamente por Arcanum Studios. V&aacute;lido como constancia de liquidaci&oacute;n de honorarios profesionales de doblaje y localizaci&oacute;n.
+      </p>
+
+      <div class="no-print" style="display:flex; gap:10px; margin-top:22px; justify-content:flex-end;">
+        <button class="btn-ghost" onclick="closeReceiptModal()">Cerrar</button>
+        <button class="btn-primary btn-primary-center" style="width:auto; margin-top:0; padding:11px 20px;" onclick="window.print()">
+          Imprimir / Guardar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'arcanum_studios_vouchers_v1';
+    const ADMIN_PASS = 'Arcanum31001488';
+    const ADMIN_EMAIL = 'febresramosjeivorjosue@gmail.com';
+
+    const DEFAULT_VOUCHERS = [
+      {
+        id: '1',
+        code: 'ARC-2026-0104',
+        talent: 'María Fernanda López Ríos',
+        role: 'Talento de Voz',
+        project: 'Proyecto 747 · Doblaje Español Latino',
+        amount: 145.00,
+        date: '2026-11-15',
+        status: 'Pagado',
+        method: 'PayPal · Ref #88412'
+      },
+      {
+        id: '2',
+        code: 'ARC-2026-0109',
+        talent: 'María Fernanda López Ríos',
+        role: 'Dirección de Doblaje',
+        project: 'Serie Vertical · Episodios 01-12',
+        amount: 210.00,
+        date: '2026-11-20',
+        status: 'Pendiente',
+        method: 'Transferencia / En proceso'
+      },
+      {
+        id: '3',
+        code: 'ARC-2026-0112',
+        talent: 'Jeivor Josué Febres Ramos',
+        role: 'Ingeniería de Audio',
+        project: 'Demo Oficial EURO · Mezcla 5.1 y Stereo',
+        amount: 320.00,
+        date: '2026-11-18',
+        status: 'Pagado',
+        method: 'Liquidación Interna · #ARC-09'
+      }
+    ];
+
+    function getVouchers() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_VOUCHERS));
+        return [...DEFAULT_VOUCHERS];
+      }
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return [...DEFAULT_VOUCHERS];
+      }
+    }
+
+    function saveVouchers(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function normalizeText(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function formatCurrency(val) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(Number(val) || 0);
+    }
+
+    function badgeClass(status) {
+      if (status === 'Pagado') return 'badge badge-pagado';
+      if (status === 'Pendiente') return 'badge badge-pendiente';
+      return 'badge badge-anulado';
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function switchView(view) {
+      const publicView = document.getElementById('publicView');
+      const adminView = document.getElementById('adminView');
+      const navPublicBtn = document.getElementById('navPublicBtn');
+      const navAdminBtn = document.getElementById('navAdminBtn');
+
+      if (view === 'admin') {
+        publicView.classList.add('hidden');
+        adminView.classList.remove('hidden');
+        navPublicBtn.classList.remove('hidden');
+        navAdminBtn.classList.add('hidden');
+        renderAdminTable();
+      } else {
+        adminView.classList.add('hidden');
+        publicView.classList.remove('hidden');
+        navAdminBtn.classList.remove('hidden');
+        navPublicBtn.classList.add('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function quickSearch(name) {
+      const input = document.getElementById('searchNameInput');
+      input.value = name;
+      executeSearch(name);
+    }
+
+    function handleSearch(e) {
+      e.preventDefault();
+      const query = document.getElementById('searchNameInput').value;
+      executeSearch(query);
+    }
+
+    function executeSearch(rawQuery) {
+      const q = normalizeText(rawQuery);
+      if (!q) return;
+
+      const all = getVouchers();
+      const matches = all.filter(v => normalizeText(v.talent).includes(q));
+
+      const section = document.getElementById('resultsSection');
+      const heading = document.getElementById('resultsHeading');
+      const grid = document.getElementById('resultsGrid');
+
+      section.classList.remove('hidden');
+      heading.textContent = matches.length
+        ? `${matches.length} comprobante(s) encontrado(s) para "${rawQuery.trim()}"`
+        : `Sin resultados para "${rawQuery.trim()}"`;
+
+      if (!matches.length) {
+        grid.innerHTML = `
+          <div class="voucher-item" style="grid-column: 1 / -1;">
+            <p style="color:var(--text-muted); font-size:0.94rem;">
+              No encontramos vouchers emitidos bajo el nombre <strong>${escapeHtml(rawQuery.trim())}</strong>. Verifica que hayas escrito tus nombres y apellidos completos o contacta a tu productor en Arcanum Studios.
+            </p>
+          </div>
+        `;
+      } else {
+        grid.innerHTML = matches.map(v => `
+          <article class="voucher-item">
+            <div>
+              <div class="voucher-top">
+                <span class="voucher-code">${escapeHtml(v.code)}</span>
+                <span class="${badgeClass(v.status)}">${escapeHtml(v.status)}</span>
+              </div>
+              <h4 class="voucher-project">${escapeHtml(v.project)}</h4>
+              <div class="voucher-talent">${escapeHtml(v.talent)} &middot; ${escapeHtml(v.role)}</div>
+            </div>
+
+            <div class="voucher-meta">
+              <div class="voucher-meta-row">
+                <span>Fecha de emisi&oacute;n</span>
+                <span style="color:var(--cream);">${escapeHtml(v.date)}</span>
+              </div>
+              <div class="voucher-meta-row">
+                <span>Referencia</span>
+                <span style="color:var(--cream); text-align:right;">${escapeHtml(v.method || 'Registro oficial')}</span>
+              </div>
+              <div class="voucher-meta-row" style="align-items:center; margin-top:6px;">
+                <span>Monto total</span>
+                <span class="voucher-amount">${formatCurrency(v.amount)}</span>
+              </div>
+            </div>
+
+            <button class="btn-ghost" style="width:100%; justify-content:center;" onclick="openReceipt('${v.id}')">
+              Ver comprobante oficial &rarr;
+            </button>
+          </article>
+        `).join('');
+      }
+
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function clearSearch() {
+      document.getElementById('searchNameInput').value = '';
+      document.getElementById('resultsSection').classList.add('hidden');
+    }
+
+    /* Admin Authentication */
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('adminEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('adminPass').value;
+      const box = document.getElementById('loginFeedback');
+
+      if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+        box.classList.add('hidden');
+        document.getElementById('adminLoginSection').classList.add('hidden');
+        document.getElementById('adminDashboardSection').classList.remove('hidden');
+        document.getElementById('vDate').valueAsDate = new Date();
+        renderAdminTable();
+      } else {
+        box.classList.remove('hidden');
+        box.textContent = 'Credenciales inválidas. Acceso denegado.';
+      }
+    }
+
+    function logoutAdmin() {
+      document.getElementById('adminPass').value = '';
+      document.getElementById('adminDashboardSection').classList.add('hidden');
+      document.getElementById('adminLoginSection').classList.remove('hidden');
+    }
+
+    /* CRUD Vouchers */
+    function saveVoucher(e) {
+      e.preventDefault();
+      const list = getVouchers();
+      const editId = document.getElementById('editVoucherId').value;
+
+      const payload = {
+        talent: document.getElementById('vTalent').value.trim(),
+        role: document.getElementById('vRole').value,
+        amount: parseFloat(document.getElementById('vAmount').value),
+        project: document.getElementById('vProject').value.trim(),
+        date: document.getElementById('vDate').value,
+        status: document.getElementById('vStatus').value,
+        method: document.getElementById('vMethod').value.trim()
+      };
+
+      if (editId) {
+        const idx = list.findIndex(item => item.id === editId);
+        if (idx !== -1) {
+          list[idx] = { ...list[idx], ...payload };
+        }
+      } else {
+        const nextNum = String(100 + list.length + 1).padStart(4, '0');
+        list.unshift({
+          id: String(Date.now()),
+          code: `ARC-2026-${nextNum}`,
+          ...payload
+        });
+      }
+
+      saveVouchers(list);
+      resetVoucherForm();
+      renderAdminTable();
+    }
+
+    function editVoucher(id) {
+      const item = getVouchers().find(v => v.id === id);
+      if (!item) return;
+
+      document.getElementById('editVoucherId').value = item.id;
+      document.getElementById('vTalent').value = item.talent;
+      document.getElementById('vRole').value = item.role;
+      document.getElementById('vAmount').value = item.amount;
+      document.getElementById('vProject').value = item.project;
+      document.getElementById('vDate').value = item.date;
+      document.getElementById('vStatus').value = item.status;
+      document.getElementById('vMethod').value = item.method || '';
+
+      document.getElementById('formModeKicker').textContent = `Editando ${item.code}`;
+      document.getElementById('formModeTitle').textContent = 'Corregir voucher';
+      document.getElementById('submitVoucherBtn').textContent = 'Guardar cambios';
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+    }
+
+    function resetVoucherForm() {
+      document.getElementById('voucherForm').reset();
+      document.getElementById('editVoucherId').value = '';
+      document.getElementById('vDate').valueAsDate = new Date();
+      document.getElementById('formModeKicker').textContent = 'Nueva emisión';
+      document.getElementById('formModeTitle').textContent = 'Emitir voucher';
+      document.getElementById('submitVoucherBtn').textContent = 'Emitir y publicar voucher';
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+    }
+
+    function toggleStatus(id, newStatus) {
+      const list = getVouchers();
+      const idx = list.findIndex(v => v.id === id);
+      if (idx !== -1) {
+        list[idx].status = newStatus;
+        saveVouchers(list);
+        renderAdminTable();
+      }
+    }
+
+    function deleteVoucher(id) {
+      const list = getVouchers().filter(v => v.id !== id);
+      saveVouchers(list);
+      renderAdminTable();
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminTableBody');
+      const list = getVouchers();
+
+      tbody.innerHTML = list.map(v => `
+        <tr>
+          <td class="voucher-code">${escapeHtml(v.code)}</td>
+          <td>
+            <div style="font-weight:500;">${escapeHtml(v.talent)}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${escapeHtml(v.role)}</div>
+          </td>
+          <td>
+            <div>${escapeHtml(v.project)}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${escapeHtml(v.date)}</div>
+          </td>
+          <td style="font-family:var(--serif); font-weight:600;" class="voucher-amount">${formatCurrency(v.amount)}</td>
+          <td><span class="${badgeClass(v.status)}">${escapeHtml(v.status)}</span></td>
+          <td>
+            <div class="action-btns">
+              <button class="mini-btn" onclick="openReceipt('${v.id}')">Ver</button>
+              <button class="mini-btn" onclick="editVoucher('${v.id}')">Editar</button>
+              ${v.status !== 'Pagado' ? `<button class="mini-btn" onclick="toggleStatus('${v.id}', 'Pagado')">Pagar</button>` : ''}
+              ${v.status !== 'Anulado' ? `<button class="mini-btn mini-btn-danger" onclick="toggleStatus('${v.id}', 'Anulado')">Anular</button>` : ''}
+              <button class="mini-btn mini-btn-danger" onclick="deleteVoucher('${v.id}')">Borrar</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    /* Barcode decoration derived from voucher code */
+    function renderBarcode(seedText) {
+      const box = document.getElementById('receiptBarcode');
+      let seed = 0;
+      for (const ch of seedText) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
+      const bars = [];
+      for (let i = 0; i < 34; i++) {
+        seed = (seed * 1103515245 + 12345) >>> 0;
+        const w = 1 + (seed % 3);
+        const h = 60 + (seed % 40);
+        bars.push(`<i style="width:${w}px; height:${h}%;"></i>`);
+      }
+      box.innerHTML = bars.join('');
+    }
+
+    function openReceipt(id) {
+      const v = getVouchers().find(item => item.id === id);
+      if (!v) return;
+
+      document.getElementById('mCode').textContent = v.code;
+      document.getElementById('mTalent').textContent = v.talent;
+      document.getElementById('mRole').textContent = v.role;
+      document.getElementById('mProject').textContent = v.project;
+      document.getElementById('mDate').textContent = v.date;
+      document.getElementById('mMethod').textContent = v.method || 'Registro oficial Arcanum Studios';
+      document.getElementById('mAmount').textContent = formatCurrency(v.amount);
+      document.getElementById('mBadgeWrap').innerHTML = `<span class="${badgeClass(v.status)}">${escapeHtml(v.status)}</span>`;
+      renderBarcode(v.code + v.id);
+
+      document.getElementById('receiptModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReceiptModal(e) {
+      if (!e || e.target.id === 'receiptModal' || e.target.closest('.btn-ghost') || e.target.closest('.btn-primary')) {
+        document.getElementById('receiptModal').classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeReceiptModal();
+    });
+
+    function exportBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(getVouchers(), null, 2));
+      const a = document.createElement('a');
+      a.setAttribute('href', dataStr);
+      a.setAttribute('download', 'arcanum-studios-vouchers-backup.json');
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+  </script>
+</body>
+</html>
